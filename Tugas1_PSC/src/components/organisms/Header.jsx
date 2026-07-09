@@ -44,13 +44,13 @@ const Header = ({ title = "", onLogout, showProfile = true }) => {
                   href="#"
                   className="block px-4 py-2 text-sm text-slate-600 hover:bg-slate-50 transition-colors"
                 >
-                  👤 Profil Saya
+                  Profil Saya
                 </a>
                 <button
                   onClick={handleLogout}
                   className="w-full text-left px-4 py-2 text-sm text-red-600 hover:bg-red-50 transition-colors font-medium border-t border-slate-50"
                 >
-                  🚪 Keluar Aplikasi
+                  Keluar Aplikasi
                 </button>
               </div>
             )}
