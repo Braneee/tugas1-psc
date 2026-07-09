@@ -23,6 +23,22 @@ ChartJS.register(
 
 const DashboardContent = ({ mahasiswa = [], dosen = [], mataKuliah = [], kelas = [], users = [] }) => {
   
+  // Cohesive Modern Color Palette
+  const chartColors = {
+    blue: "rgb(37, 99, 235)",
+    blueLight: "rgba(37, 99, 235, 0.75)",
+    emerald: "rgb(16, 185, 129)",
+    emeraldLight: "rgba(16, 185, 129, 0.75)",
+    amber: "rgb(245, 158, 11)",
+    amberLight: "rgba(245, 158, 11, 0.75)",
+    violet: "rgb(139, 92, 246)",
+    violetLight: "rgba(139, 92, 246, 0.75)",
+    slate: "rgb(100, 116, 139)",
+    slateLight: "rgba(100, 116, 139, 0.75)",
+    rose: "rgb(244, 63, 94)",
+    roseLight: "rgba(244, 63, 94, 0.75)"
+  };
+
   // Chart 1: Bar Chart (Jumlah Data per Entitas)
   const barData = {
     labels: ["Mahasiswa", "Dosen", "Mata Kuliah", "Kelas", "User"],
@@ -31,20 +47,22 @@ const DashboardContent = ({ mahasiswa = [], dosen = [], mataKuliah = [], kelas =
         label: "Jumlah Data",
         data: [mahasiswa.length, dosen.length, mataKuliah.length, kelas.length, users.length],
         backgroundColor: [
-          "rgba(59, 130, 246, 0.7)",  // Blue
-          "rgba(16, 185, 129, 0.7)",  // Green
-          "rgba(245, 158, 11, 0.7)",  // Orange
-          "rgba(139, 92, 246, 0.7)",  // Purple
-          "rgba(107, 114, 128, 0.7)", // Gray
+          chartColors.blueLight,
+          chartColors.emeraldLight,
+          chartColors.amberLight,
+          chartColors.violetLight,
+          chartColors.slateLight,
         ],
         borderColor: [
-          "rgb(59, 130, 246)",
-          "rgb(16, 185, 129)",
-          "rgb(245, 158, 11)",
-          "rgb(139, 92, 246)",
-          "rgb(107, 114, 128)",
+          chartColors.blue,
+          chartColors.emerald,
+          chartColors.amber,
+          chartColors.violet,
+          chartColors.slate,
         ],
         borderWidth: 1.5,
+        borderRadius: 8,
+        borderSkipped: false,
       },
     ],
   };
@@ -58,10 +76,29 @@ const DashboardContent = ({ mahasiswa = [], dosen = [], mataKuliah = [], kelas =
       },
     },
     scales: {
+      x: {
+        grid: {
+          display: false,
+        },
+        ticks: {
+          font: {
+            family: "Inter, sans-serif",
+            weight: "500",
+          },
+          color: "#64748b",
+        },
+      },
       y: {
         beginAtZero: true,
+        grid: {
+          color: "#f1f5f9",
+        },
         ticks: {
           stepSize: 1,
+          font: {
+            family: "Inter, sans-serif",
+          },
+          color: "#64748b",
         },
       },
     },
@@ -82,20 +119,20 @@ const DashboardContent = ({ mahasiswa = [], dosen = [], mataKuliah = [], kelas =
         label: "Jumlah User",
         data: roleValues,
         backgroundColor: [
-          "rgba(139, 92, 246, 0.7)", // Purple
-          "rgba(59, 130, 246, 0.7)",  // Blue
-          "rgba(16, 185, 129, 0.7)",  // Green
-          "rgba(245, 158, 11, 0.7)",  // Orange
-          "rgba(107, 114, 128, 0.7)", // Gray
+          chartColors.violetLight,
+          chartColors.blueLight,
+          chartColors.emeraldLight,
+          chartColors.amberLight,
+          chartColors.slateLight,
         ],
         borderColor: [
-          "rgb(139, 92, 246)",
-          "rgb(59, 130, 246)",
-          "rgb(16, 185, 129)",
-          "rgb(245, 158, 11)",
-          "rgb(107, 114, 128)",
+          chartColors.violet,
+          chartColors.blue,
+          chartColors.emerald,
+          chartColors.amber,
+          chartColors.slate,
         ],
-        borderWidth: 1,
+        borderWidth: 1.5,
       },
     ],
   };
@@ -106,6 +143,16 @@ const DashboardContent = ({ mahasiswa = [], dosen = [], mataKuliah = [], kelas =
     plugins: {
       legend: {
         position: "bottom",
+        labels: {
+          boxWidth: 12,
+          padding: 15,
+          font: {
+            family: "Inter, sans-serif",
+            size: 11,
+            weight: "500",
+          },
+          color: "#334155",
+        },
       },
     },
   };
@@ -126,18 +173,19 @@ const DashboardContent = ({ mahasiswa = [], dosen = [], mataKuliah = [], kelas =
         label: "Jumlah Matkul",
         data: sksValues,
         backgroundColor: [
-          "rgba(245, 158, 11, 0.7)",  // Orange
-          "rgba(59, 130, 246, 0.7)",  // Blue
-          "rgba(16, 185, 129, 0.7)",  // Green
-          "rgba(239, 68, 68, 0.7)",   // Red
+          chartColors.amberLight,
+          chartColors.blueLight,
+          chartColors.emeraldLight,
+          chartColors.roseLight,
         ],
         borderColor: [
-          "rgb(245, 158, 11)",
-          "rgb(59, 130, 246)",
-          "rgb(16, 185, 129)",
-          "rgb(239, 68, 68)",
+          chartColors.amber,
+          chartColors.blue,
+          chartColors.emerald,
+          chartColors.rose,
         ],
-        borderWidth: 1,
+        borderWidth: 1.5,
+        cutout: "65%",
       },
     ],
   };
@@ -148,64 +196,120 @@ const DashboardContent = ({ mahasiswa = [], dosen = [], mataKuliah = [], kelas =
     plugins: {
       legend: {
         position: "bottom",
+        labels: {
+          boxWidth: 12,
+          padding: 15,
+          font: {
+            family: "Inter, sans-serif",
+            size: 11,
+            weight: "500",
+          },
+          color: "#334155",
+        },
       },
     },
   };
 
   return (
-    <div className="space-y-8">
+    <div className="space-y-8 p-2">
       {/* Page Header */}
-      <div>
-        <h2 className="text-2xl font-bold text-gray-800">📊 Dashboard Analisis Akademik</h2>
-        <p className="text-sm text-gray-500 mt-1">Ringkasan statistik data akademik secara real-time</p>
+      <div className="flex flex-col md:flex-row md:items-center justify-between gap-4">
+        <div>
+          <h2 className="text-xl font-bold text-slate-800 tracking-tight">
+            📊 Dashboard Analisis Akademik
+          </h2>
+          <p className="text-sm text-slate-500 mt-0.5">
+            Ringkasan data administrasi akademik secara real-time dan interaktif.
+          </p>
+        </div>
+        <div className="flex items-center space-x-2 text-xs font-semibold text-slate-500 bg-slate-100 px-3.5 py-2 rounded-xl border border-slate-200">
+          <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span>
+          <span>Sistem Aktif (Vercel Cloud)</span>
+        </div>
       </div>
 
       {/* Summary Cards Grid */}
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
         {/* Card 1: Mahasiswa */}
-        <div className="bg-gradient-to-br from-blue-50 to-blue-100 border border-blue-200 rounded-xl p-5 shadow-sm flex items-center justify-between transition hover:shadow-md">
-          <div>
-            <p className="text-xs font-semibold text-blue-600 uppercase tracking-wider">Total Mahasiswa</p>
-            <h3 className="text-3xl font-extrabold text-blue-900 mt-2">{mahasiswa.length}</h3>
+        <div className="bg-white border border-slate-200 rounded-2xl p-6 shadow-sm hover:shadow-md transition-all duration-300 flex items-center justify-between">
+          <div className="space-y-1">
+            <span className="text-xs font-semibold text-slate-400 uppercase tracking-wider">
+              Total Mahasiswa
+            </span>
+            <h3 className="text-3xl font-extrabold text-slate-800">
+              {mahasiswa.length}
+            </h3>
+            <span className="inline-flex items-center text-xs font-medium text-blue-600 bg-blue-50 px-2.5 py-0.5 rounded-full border border-blue-100">
+              🎓 Terdaftar aktif
+            </span>
           </div>
-          <span className="text-4xl bg-blue-200 p-3 rounded-xl">🎓</span>
+          <div className="w-14 h-14 bg-blue-50 text-blue-600 rounded-2xl flex items-center justify-center text-2xl shadow-inner">
+            🎓
+          </div>
         </div>
 
         {/* Card 2: Dosen */}
-        <div className="bg-gradient-to-br from-emerald-50 to-emerald-100 border border-emerald-200 rounded-xl p-5 shadow-sm flex items-center justify-between transition hover:shadow-md">
-          <div>
-            <p className="text-xs font-semibold text-emerald-600 uppercase tracking-wider">Total Dosen</p>
-            <h3 className="text-3xl font-extrabold text-emerald-900 mt-2">{dosen.length}</h3>
+        <div className="bg-white border border-slate-200 rounded-2xl p-6 shadow-sm hover:shadow-md transition-all duration-300 flex items-center justify-between">
+          <div className="space-y-1">
+            <span className="text-xs font-semibold text-slate-400 uppercase tracking-wider">
+              Total Dosen
+            </span>
+            <h3 className="text-3xl font-extrabold text-slate-800">
+              {dosen.length}
+            </h3>
+            <span className="inline-flex items-center text-xs font-medium text-emerald-600 bg-emerald-50 px-2.5 py-0.5 rounded-full border border-emerald-100">
+              👨‍🏫 Staf Pengajar
+            </span>
           </div>
-          <span className="text-4xl bg-emerald-200 p-3 rounded-xl">👨‍🏫</span>
+          <div className="w-14 h-14 bg-emerald-50 text-emerald-600 rounded-2xl flex items-center justify-center text-2xl shadow-inner">
+            👨‍🏫
+          </div>
         </div>
 
         {/* Card 3: Mata Kuliah */}
-        <div className="bg-gradient-to-br from-amber-50 to-amber-100 border border-amber-200 rounded-xl p-5 shadow-sm flex items-center justify-between transition hover:shadow-md">
-          <div>
-            <p className="text-xs font-semibold text-amber-600 uppercase tracking-wider">Total Mata Kuliah</p>
-            <h3 className="text-3xl font-extrabold text-amber-900 mt-2">{mataKuliah.length}</h3>
+        <div className="bg-white border border-slate-200 rounded-2xl p-6 shadow-sm hover:shadow-md transition-all duration-300 flex items-center justify-between">
+          <div className="space-y-1">
+            <span className="text-xs font-semibold text-slate-400 uppercase tracking-wider">
+              Total Mata Kuliah
+            </span>
+            <h3 className="text-3xl font-extrabold text-slate-800">
+              {mataKuliah.length}
+            </h3>
+            <span className="inline-flex items-center text-xs font-medium text-amber-600 bg-amber-50 px-2.5 py-0.5 rounded-full border border-amber-100">
+              📚 Silabus Aktif
+            </span>
           </div>
-          <span className="text-4xl bg-amber-200 p-3 rounded-xl">📚</span>
+          <div className="w-14 h-14 bg-amber-50 text-amber-600 rounded-2xl flex items-center justify-center text-2xl shadow-inner">
+            📚
+          </div>
         </div>
 
         {/* Card 4: Kelas */}
-        <div className="bg-gradient-to-br from-violet-50 to-violet-100 border border-violet-200 rounded-xl p-5 shadow-sm flex items-center justify-between transition hover:shadow-md">
-          <div>
-            <p className="text-xs font-semibold text-violet-600 uppercase tracking-wider">Total Kelas</p>
-            <h3 className="text-3xl font-extrabold text-violet-900 mt-2">{kelas.length}</h3>
+        <div className="bg-white border border-slate-200 rounded-2xl p-6 shadow-sm hover:shadow-md transition-all duration-300 flex items-center justify-between">
+          <div className="space-y-1">
+            <span className="text-xs font-semibold text-slate-400 uppercase tracking-wider">
+              Total Kelas
+            </span>
+            <h3 className="text-3xl font-extrabold text-slate-800">
+              {kelas.length}
+            </h3>
+            <span className="inline-flex items-center text-xs font-medium text-violet-600 bg-violet-50 px-2.5 py-0.5 rounded-full border border-violet-100">
+              🏫 Jadwal Kuliah
+            </span>
           </div>
-          <span className="text-4xl bg-violet-200 p-3 rounded-xl">🏫</span>
+          <div className="w-14 h-14 bg-violet-50 text-violet-600 rounded-2xl flex items-center justify-center text-2xl shadow-inner">
+            🏫
+          </div>
         </div>
       </div>
 
       {/* Charts Grid */}
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
         {/* Chart 1: Bar Chart */}
-        <div className="bg-white border border-gray-200 rounded-xl p-5 shadow-sm flex flex-col h-96">
+        <div className="bg-white border border-slate-200 rounded-2xl p-6 shadow-sm flex flex-col h-96">
           <div className="mb-4">
-            <h4 className="font-bold text-gray-800 text-base">📊 Jumlah Data Entitas</h4>
-            <p className="text-xs text-gray-500">Perbandingan total baris data per tabel akademik</p>
+            <h4 className="font-bold text-slate-800 text-sm tracking-tight">📊 Jumlah Data Entitas</h4>
+            <p className="text-xs text-slate-400 mt-0.5">Perbandingan total baris data per tabel akademik</p>
           </div>
           <div className="flex-1 relative">
             <Bar data={barData} options={barOptions} />
@@ -213,10 +317,10 @@ const DashboardContent = ({ mahasiswa = [], dosen = [], mataKuliah = [], kelas =
         </div>
 
         {/* Chart 2: Pie Chart */}
-        <div className="bg-white border border-gray-200 rounded-xl p-5 shadow-sm flex flex-col h-96">
+        <div className="bg-white border border-slate-200 rounded-2xl p-6 shadow-sm flex flex-col h-96">
           <div className="mb-4">
-            <h4 className="font-bold text-gray-800 text-base">🍰 Distribusi Role Akun</h4>
-            <p className="text-xs text-gray-500">Persentase pembagian hak akses pengguna terdaftar</p>
+            <h4 className="font-bold text-slate-800 text-sm tracking-tight">🍰 Distribusi Role Akun</h4>
+            <p className="text-xs text-slate-400 mt-0.5">Persentase pembagian hak akses pengguna terdaftar</p>
           </div>
           <div className="flex-1 relative">
             <Pie data={pieData} options={pieOptions} />
@@ -224,10 +328,10 @@ const DashboardContent = ({ mahasiswa = [], dosen = [], mataKuliah = [], kelas =
         </div>
 
         {/* Chart 3: Doughnut Chart */}
-        <div className="bg-white border border-gray-200 rounded-xl p-5 shadow-sm flex flex-col h-96">
+        <div className="bg-white border border-slate-200 rounded-2xl p-6 shadow-sm flex flex-col h-96">
           <div className="mb-4">
-            <h4 className="font-bold text-gray-800 text-base">🍩 Beban SKS Mata Kuliah</h4>
-            <p className="text-xs text-gray-500">Proporsi pembagian nilai SKS mata kuliah</p>
+            <h4 className="font-bold text-slate-800 text-sm tracking-tight">🍩 Beban SKS Mata Kuliah</h4>
+            <p className="text-xs text-slate-400 mt-0.5">Proporsi pembagian nilai SKS mata kuliah</p>
           </div>
           <div className="flex-1 relative">
             <Doughnut data={doughnutData} options={doughnutOptions} />

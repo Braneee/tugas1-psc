@@ -1,15 +1,15 @@
 const variantClasses = {
-  primary: "bg-blue-600 hover:bg-blue-700 text-white",
-  secondary: "bg-gray-600 hover:bg-gray-700 text-white",
-  warning: "bg-yellow-500 hover:bg-yellow-600 text-white",
-  info: "bg-cyan-600 hover:bg-cyan-700 text-white",
-  danger: "bg-red-600 hover:bg-red-700 text-white",
+  primary: "bg-blue-600 hover:bg-blue-700 text-white shadow-sm hover:shadow-blue-500/10 active:scale-98",
+  secondary: "bg-slate-100 hover:bg-slate-200 text-slate-700 active:scale-98",
+  warning: "bg-amber-500 hover:bg-amber-600 text-white shadow-sm active:scale-98",
+  info: "bg-indigo-600 hover:bg-indigo-700 text-white shadow-sm active:scale-98",
+  danger: "bg-rose-600 hover:bg-rose-700 text-white shadow-sm active:scale-98",
 };
 
 const sizeClasses = {
-  sm: "px-3 py-1 text-sm",
-  md: "px-4 py-2",
-  lg: "px-6 py-3 text-lg",
+  sm: "px-3 py-1.5 text-xs rounded-lg",
+  md: "px-4.5 py-2.5 text-sm rounded-xl",
+  lg: "px-6 py-3.5 text-base rounded-2xl",
 };
 
 const Button = ({
@@ -23,7 +23,7 @@ const Button = ({
   return (
     <button
       type={type}
-      className={`rounded-lg transition font-medium focus:outline-none cursor-pointer ${variantClasses[variant]} ${sizeClasses[size]} ${className}`}
+      className={`transition-all duration-200 font-semibold focus:outline-none cursor-pointer ${variantClasses[variant]} ${sizeClasses[size]} ${className}`}
       {...props}
     >
       {children}

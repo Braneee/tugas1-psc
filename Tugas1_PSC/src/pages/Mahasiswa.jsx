@@ -780,7 +780,7 @@ const Mahasiswa = () => {
           {activeMenu === "Dashboard" ? (
             renderContent()
           ) : (
-            <div className="bg-white shadow rounded-lg p-6">
+            <div className="bg-white border border-slate-200 rounded-2xl p-6 shadow-sm">
               {renderContent()}
             </div>
           )}
