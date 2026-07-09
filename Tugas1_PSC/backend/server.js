@@ -805,3 +805,5 @@ app.listen(PORT, () => {
   console.log(`\n✅ Server berjalan di http://localhost:${PORT}`);
   console.log(`📋 Buka browser dan akses aplikasi\n`);
 });
+
+module.exports = app;
