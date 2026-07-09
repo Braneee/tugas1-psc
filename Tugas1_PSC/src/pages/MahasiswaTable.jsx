@@ -24,57 +24,60 @@ const MahasiswaTable = ({ mahasiswa = [], onEdit, onDelete }) => {
   const paginatedMahasiswa = mahasiswa.slice(startIndex, endIndex);
 
   return (
-    <div>
-      <div className="overflow-x-auto">
+    <div className="w-full">
+      <div className="overflow-hidden border border-slate-200 rounded-2xl bg-white shadow-sm">
         {mahasiswa.length === 0 ? (
-          <div className="text-center py-8 text-gray-500">
-            <p>Tidak ada data mahasiswa</p>
+          <div className="text-center py-12 text-slate-400">
+            <span className="text-4xl block mb-2">📂</span>
+            <p className="text-sm font-medium">Tidak ada data mahasiswa</p>
           </div>
         ) : (
-          <table className="w-full text-sm text-gray-700">
-            <thead className="bg-blue-600 text-white">
-              <tr>
-                <th className="py-3 px-4 text-left">NIM</th>
-                <th className="py-3 px-4 text-left">Nama</th>
-                <th className="py-3 px-4 text-left">Jurusan</th>
-                <th className="py-3 px-4 text-left">SKS Diambil</th>
-                <th className="py-3 px-4 text-center">Aksi</th>
+          <table className="w-full text-left border-collapse">
+            <thead>
+              <tr className="bg-slate-50/75 border-b border-slate-200">
+                <th className="py-4 px-6 text-xs font-bold text-slate-500 uppercase tracking-wider">NIM</th>
+                <th className="py-4 px-6 text-xs font-bold text-slate-500 uppercase tracking-wider">Nama</th>
+                <th className="py-4 px-6 text-xs font-bold text-slate-500 uppercase tracking-wider">Jurusan</th>
+                <th className="py-4 px-6 text-xs font-bold text-slate-500 uppercase tracking-wider">SKS Diambil</th>
+                <th className="py-4 px-6 text-xs font-bold text-slate-500 uppercase tracking-wider text-center">Aksi</th>
               </tr>
             </thead>
-            <tbody>
+            <tbody className="divide-y divide-slate-100">
               {paginatedMahasiswa.map((m) => (
                 <tr
                   key={m.nim}
-                  className="even:bg-gray-100 odd:bg-white border-b hover:bg-gray-50"
+                  className="hover:bg-slate-50/50 transition-colors duration-150"
                 >
-                  <td className="py-3 px-4 font-mono font-bold">{m.nim}</td>
-                  <td className="py-3 px-4 font-semibold">{m.name}</td>
-                  <td className="py-3 px-4">{m.major}</td>
-                  <td className="py-3 px-4">
-                    <span className={`px-2.5 py-1 rounded-full text-xs font-bold ${
-                      (m.sksTaken || 0) > 20 ? "bg-red-100 text-red-800" :
-                      (m.sksTaken || 0) > 12 ? "bg-amber-100 text-amber-800" :
-                      (m.sksTaken || 0) > 0 ? "bg-blue-100 text-blue-800" :
-                      "bg-gray-100 text-gray-800"
+                  <td className="py-4 px-6 font-mono text-xs font-bold text-slate-500 tracking-wide">{m.nim}</td>
+                  <td className="py-4 px-6 text-sm font-bold text-slate-800">{m.name}</td>
+                  <td className="py-4 px-6 text-sm text-slate-600">{m.major}</td>
+                  <td className="py-4 px-6 text-sm">
+                    <span className={`inline-flex items-center px-2.5 py-1 rounded-full text-xs font-bold ${
+                      (m.sksTaken || 0) > 20 ? "bg-rose-50 text-rose-700 border border-rose-100" :
+                      (m.sksTaken || 0) > 12 ? "bg-amber-50 text-amber-700 border border-amber-100" :
+                      (m.sksTaken || 0) > 0 ? "bg-blue-50 text-blue-700 border border-blue-100" :
+                      "bg-slate-50 text-slate-600 border border-slate-200"
                     }`}>
                       {m.sksTaken || 0} / 24 SKS
                     </span>
                   </td>
-                  <td className="py-3 px-4 text-center space-x-2 flex justify-center">
-                    <Button
-                      variant="warning"
-                      className="px-3 py-1 text-sm"
-                      onClick={() => onEdit(m.nim)}
-                    >
-                      Edit
-                    </Button>
-                    <Button
-                      variant="danger"
-                      className="px-3 py-1 text-sm"
-                      onClick={() => handleDelete(m.nim)}
-                    >
-                      Hapus
-                    </Button>
+                  <td className="py-4 px-6 text-center">
+                    <div className="flex items-center justify-center space-x-2">
+                      <Button
+                        variant="warning"
+                        size="sm"
+                        onClick={() => onEdit(m.nim)}
+                      >
+                        Edit
+                      </Button>
+                      <Button
+                        variant="danger"
+                        size="sm"
+                        onClick={() => handleDelete(m.nim)}
+                      >
+                        Hapus
+                      </Button>
+                    </div>
                   </td>
                 </tr>
               ))}
@@ -84,15 +87,15 @@ const MahasiswaTable = ({ mahasiswa = [], onEdit, onDelete }) => {
       </div>
 
       {totalItems > 0 && (
-        <div className="flex flex-col sm:flex-row justify-between items-center mt-6 pt-4 border-t border-gray-200 gap-4">
-          <div className="text-sm text-gray-600">
-            Menampilkan <strong className="font-semibold text-gray-800">{Math.min(startIndex + 1, totalItems)}</strong> sampai <strong className="font-semibold text-gray-800">{Math.min(endIndex, totalItems)}</strong> dari <strong className="font-semibold text-gray-800">{totalItems}</strong> data
+        <div className="flex flex-col sm:flex-row justify-between items-center mt-6 gap-4">
+          <div className="text-xs text-slate-500 font-medium">
+            Menampilkan <strong className="font-semibold text-slate-700">{Math.min(startIndex + 1, totalItems)}</strong> sampai <strong className="font-semibold text-slate-700">{Math.min(endIndex, totalItems)}</strong> dari <strong className="font-semibold text-slate-700">{totalItems}</strong> data
           </div>
-          <div className="flex items-center space-x-1">
+          <div className="flex items-center space-x-1.5">
             <button
               onClick={() => setCurrentPage((prev) => Math.max(prev - 1, 1))}
               disabled={currentPage === 1}
-              className="px-3 py-1.5 border border-gray-300 rounded-lg text-sm font-medium text-gray-700 bg-white hover:bg-gray-50 disabled:opacity-50 disabled:cursor-not-allowed transition"
+              className="px-3.5 py-2 border border-slate-200 rounded-xl text-xs font-semibold text-slate-600 bg-white hover:bg-slate-50 disabled:opacity-50 disabled:cursor-not-allowed transition-all duration-200 cursor-pointer"
             >
               Sebelumnya
             </button>
@@ -101,10 +104,10 @@ const MahasiswaTable = ({ mahasiswa = [], onEdit, onDelete }) => {
               <button
                 key={page}
                 onClick={() => setCurrentPage(page)}
-                className={`px-3 py-1.5 border rounded-lg text-sm font-medium transition ${
+                className={`w-8 h-8 rounded-xl text-xs font-bold transition-all duration-200 cursor-pointer ${
                   currentPage === page
-                    ? "bg-blue-600 border-blue-600 text-white"
-                    : "border-gray-300 bg-white text-gray-700 hover:bg-gray-50"
+                    ? "bg-blue-600 text-white shadow-md shadow-blue-500/20"
+                    : "border border-slate-200 bg-white text-slate-600 hover:bg-slate-50"
                 }`}
               >
                 {page}
@@ -114,7 +117,7 @@ const MahasiswaTable = ({ mahasiswa = [], onEdit, onDelete }) => {
             <button
               onClick={() => setCurrentPage((prev) => Math.min(prev + 1, totalPages))}
               disabled={currentPage === totalPages}
-              className="px-3 py-1.5 border border-gray-300 rounded-lg text-sm font-medium text-gray-700 bg-white hover:bg-gray-50 disabled:opacity-50 disabled:cursor-not-allowed transition"
+              className="px-3.5 py-2 border border-slate-200 rounded-xl text-xs font-semibold text-slate-600 bg-white hover:bg-slate-50 disabled:opacity-50 disabled:cursor-not-allowed transition-all duration-200 cursor-pointer"
             >
               Selanjutnya
             </button>
