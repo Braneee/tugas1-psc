@@ -28,8 +28,10 @@ const MahasiswaTable = ({ mahasiswa = [], onEdit, onDelete }) => {
       <div className="overflow-hidden border border-slate-200 rounded-2xl bg-white shadow-sm">
         {mahasiswa.length === 0 ? (
           <div className="text-center py-12 text-slate-400">
-            <span className="text-4xl block mb-2">📂</span>
-            <p className="text-sm font-medium">Tidak ada data mahasiswa</p>
+            <svg className="w-10 h-10 mx-auto mb-2 text-slate-300" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M20 13V6a2 2 0 00-2-2H6a2 2 0 00-2 2v7m16 0a2 2 0 01-2 2H6a2 2 0 01-2-2m16 0v5a2 2 0 01-2 2H6a2 2 0 01-2-2v-5M14 10h1"></path>
+            </svg>
+            <p className="text-sm font-medium text-slate-500">Tidak ada data mahasiswa</p>
           </div>
         ) : (
           <table className="w-full text-left border-collapse">
